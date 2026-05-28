@@ -50,7 +50,7 @@ Use these dimensions internally, but do not emit them as separate fields:
 
 ## Missing JD guidance
 
-If the service-provided JD body is missing or thin:
+The orchestrator should already be requesting JDs via `GET /api/jobs?include_jd=true`. If the service-provided JD body is still missing or thin after that parameter is set:
 
 - do not invent details
 - prefer `LOW_PRIORITY`

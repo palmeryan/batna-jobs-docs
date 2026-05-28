@@ -79,7 +79,7 @@ These implementation details supersede older design-doc sections that still ment
 
 ### 1. Build the candidate company set
 
-1. paginate `GET /api/jobs`
+1. paginate `GET /api/jobs?include_jd=true`
 2. collect every returned job's `company`
 3. deduplicate by `company.id`
 4. paginate `GET /api/me/companies`
@@ -158,7 +158,7 @@ Do not add unsupported fields.
 
 ### 1. Build the pending job set
 
-1. paginate `GET /api/jobs`
+1. paginate `GET /api/jobs?include_jd=true`
 2. paginate `GET /api/me/companies`
 3. paginate `GET /api/me/jobs`
 4. build a set of approved company IDs from user-company rows where `evalStatus` is `APPROVED`
