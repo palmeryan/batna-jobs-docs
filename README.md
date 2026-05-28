@@ -1,4 +1,4 @@
-# batna-skills
+# batna jobs POC skills
 
 Public skill repository for the batna jobs proof of concept.
 
