@@ -4,7 +4,7 @@
     {
       "name": "batna-bootstrap",
       "version": "0.1.0",
-      "base_url": "https://raw.githubusercontent.com/batna/batna-skills/main/batna-bootstrap/",
+      "base_url": "https://raw.githubusercontent.com/palmeryan/batna-jobs-docs/master/batna-bootstrap/",
       "files": [
         "SKILL.md"
       ],
@@ -13,7 +13,7 @@
     {
       "name": "batna-preferences",
       "version": "0.1.0",
-      "base_url": "https://raw.githubusercontent.com/batna/batna-skills/main/batna-preferences/",
+      "base_url": "https://raw.githubusercontent.com/palmeryan/batna-jobs-docs/master/batna-preferences/",
       "files": [
         "SKILL.md",
         "company-prefs-template.md",
@@ -24,7 +24,7 @@
     {
       "name": "batna-subagent-review",
       "version": "0.1.0",
-      "base_url": "https://raw.githubusercontent.com/batna/batna-skills/main/batna-subagent-review/",
+      "base_url": "https://raw.githubusercontent.com/palmeryan/batna-jobs-docs/master/batna-subagent-review/",
       "files": [
         "SKILL.md",
         "company-eval-prompt.md",
