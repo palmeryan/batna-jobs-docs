@@ -36,7 +36,7 @@ Do not assume archive download, extraction, or digest verification.
 
 - Default working folder: `~/.batna/jobs/`
 - UUID source: `{working_folder}/account.json`
-- API base: `https://jobs.batna.dev/api`
+- API base: `https://api.jobs.batna.dev`
 - Auth: `Authorization: Bearer {UUID}`
 
 Expected `account.json` shape:

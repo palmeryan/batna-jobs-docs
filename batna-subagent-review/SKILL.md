@@ -34,7 +34,7 @@ Stop if either preferences file is missing or empty.
 
 ## API contract to honor
 
-Base URL: `https://jobs.batna.dev/api`
+Base URL: `https://api.jobs.batna.dev`
 
 Auth header on every request:
 
