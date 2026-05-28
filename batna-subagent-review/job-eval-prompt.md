@@ -80,3 +80,7 @@ Example shape:
 ```
 
 Return exactly one object for each input `job_id`, exactly once.
+
+## Output delivery
+
+Write the final JSON array to the file path provided by the orchestrator. Do not rely on chat messages or memory to return the result. If no file path is provided, write to `/tmp/job-eval-output.json` and report that path in your completion message.

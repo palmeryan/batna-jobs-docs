@@ -116,18 +116,26 @@ Each candidate object should include enough context for evaluation, for example:
 - `canonicalDomain`
 - a few sample job titles if available
 
-### 4. Execution order
+### 4. Subagent output contract
 
-Process company chunks sequentially.
+Each subagent MUST write its final JSON array to a durable file and report the path. Do not rely on chat messages or memory for the handoff.
 
-For each chunk:
+Orchestrator instructions for each chunk:
 
-1. run one subagent
-2. validate the JSON output
-3. POST immediately
-4. move to the next chunk
+1. Choose a deterministic output file path, for example `/tmp/company-eval-chunk-{index}.json`, and pass it explicitly in the subagent prompt.
+2. Launch the subagent.
+3. Wait for the subagent to complete (monitor lifecycle events or inbox messages).
+4. Read the file from the path the subagent reported. If the file is missing or empty, wait up to one additional minute, then treat the chunk as failed.
+5. Validate the JSON output (parse as array, count matches input, each expected ID appears exactly once).
+6. Only after validation succeeds, POST the chunk to the API.
+7. Then move to the next chunk.
 
 Immediate POST after each validated chunk avoids losing completed work if the run is interrupted.
+
+If a subagent fails to produce a readable output file after the wait window:
+
+1. Retry the same chunk once with an explicit reminder to write to the file path.
+2. If it still fails, stop and report the unresolved chunk IDs. Do not silently fall back to local scoring.
 
 ### 5. Company POST payload
 
@@ -186,6 +194,14 @@ Each candidate job object should include:
 
 Job evaluation MUST run via subagent output for each chunk (max 5 jobs). Do not replace subagent judgment with local regex-only or rules-only classification except as an explicit fallback after repeated subagent failure.
 
+For each chunk, apply the same subagent output contract used in Stage 1:
+
+1. Choose a deterministic output file path, for example `/tmp/job-eval-chunk-{index}.json`, and pass it explicitly in the subagent prompt.
+2. Launch the subagent.
+3. Wait for the subagent to complete.
+4. Read the file from the path the subagent reported. If the file is missing or empty, wait up to one additional minute, then treat the chunk as failed.
+5. Validate the JSON output.
+
 Job chunks can run in parallel, but validation must complete before any POSTs.
 
 After all chunks return:
@@ -198,6 +214,8 @@ After all chunks return:
    - if `jd_full_text` is missing or thin, rely on conservative job scoring rules and explain uncertainty in `agent_reasoning`
 5. save chunk artifacts locally (`job-chunk-input-*.json`, `job-chunk-output-*.json`, `job-chunk-validated-*.json`)
 6. POST validated chunks sequentially
+
+If a subagent fails to produce a readable output file after the wait window, retry once. If it still fails, stop and report the unresolved chunk IDs. Do not silently fall back to local scoring.
 
 ### 6. Job POST payload
 
