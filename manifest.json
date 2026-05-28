@@ -1,0 +1,36 @@
+{
+  "manifest_version": 1,
+  "skills": [
+    {
+      "name": "batna-bootstrap",
+      "version": "0.1.0",
+      "base_url": "https://raw.githubusercontent.com/batna/batna-skills/main/batna-bootstrap/",
+      "files": [
+        "SKILL.md"
+      ],
+      "breaking": false
+    },
+    {
+      "name": "batna-preferences",
+      "version": "0.1.0",
+      "base_url": "https://raw.githubusercontent.com/batna/batna-skills/main/batna-preferences/",
+      "files": [
+        "SKILL.md",
+        "company-prefs-template.md",
+        "job-prefs-template.md"
+      ],
+      "breaking": false
+    },
+    {
+      "name": "batna-subagent-review",
+      "version": "0.1.0",
+      "base_url": "https://raw.githubusercontent.com/batna/batna-skills/main/batna-subagent-review/",
+      "files": [
+        "SKILL.md",
+        "company-eval-prompt.md",
+        "job-eval-prompt.md"
+      ],
+      "breaking": false
+    }
+  ]
+}
